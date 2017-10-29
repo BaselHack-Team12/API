@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>OpenLayers Demo</title>
+    <script src="jquery-1.11.0.min.js"></script>
+	<style>
+		body {
+			width: 1500px;
+			height: 850px;
+		}
+	</style>
+    <script>
+		function init() {
+			var streetsDanger1 = [{"name": "Gasstrasse", "lat":"47.570401", "lon":"7.5738286"}];
+			var streetsDanger2 = [{"name": "Holeestrasse", "lat":"47.54698", "lon":"7.57117"}];
+			var streetsDanger3 = [{"name": "Mülhauserstrasse", "lat":"47.570401", "lon":"7.5738286"},{"name": "Wasserstrasse", "lat":"47.570401", "lon":"7.5738286"}];
+			var url = "http://overpass-turbo.eu/map.html?Q=%0A[out%3Ajson][timeout%3A25]%3B(";
+			for (i = 0; i < streetsDanger1.length; i++) { 
+				url += "way[%22name%22~%22" + streetsDanger1[i]["name"] + "%22](around%3A1000%2C" + streetsDanger1[i]["lat"] + "%2C" + streetsDanger1[i]["lon"] + ")%3B";
+			}
+			for (i = 0; i < streetsDanger2.length; i++) { 
+				url += "way[%22name%22~%22" + streetsDanger2[i]["name"] + "%22](around%3A1000%2C" + streetsDanger2[i]["lat"] + "%2C" + streetsDanger2[i]["lon"] + ")%3B";
+			}
+			for (i = 0; i < streetsDanger3.length; i++) { 
+				url += "way[%22name%22~%22" + streetsDanger3[i]["name"] + "%22](around%3A1000%2C" + streetsDanger3[i]["lat"] + "%2C" + streetsDanger3[i]["lon"] + ")%3B";
+			}
+			url += ")%3Bout%20body%3B%3E%3Bout%20skel%20qt%3B{{style%3A%20";
+			for (i = 0; i < streetsDanger1.length; i++) {
+				if (i === streetsDanger1.length - 1) {
+					url += "way[name%3D" + streetsDanger1[i]["name"] + "]" ;
+				} else {
+					url += "way[name%3D" + streetsDanger1[i]["name"] + "]%2C" ;
+				}
+			}
+			url += "{color%3Agreen%3Bwidth%3A4%3Bopacity%3A0.75%3B}%20";
+			for (i = 0; i < streetsDanger2.length; i++) {
+				if (i === streetsDanger2.length - 1) {
+					url += "way[name%3D" + streetsDanger2[i]["name"] + "]" ;
+				} else {
+					url += "way[name%3D" + streetsDanger2[i]["name"] + "]%2C" ;
+				}
+			}
+			url += "{color%3Ablue%3Bwidth%3A4%3Bopacity%3A0.75%3B}%20";
+			for (i = 0; i < streetsDanger3.length; i++) {
+				if (i === streetsDanger3.length - 1) {
+					url += "way[name%3D" + streetsDanger3[i]["name"] + "]" ;
+				} else {
+					url += "way[name%3D" + streetsDanger3[i]["name"] + "]%2C" ;
+				}
+			}
+			url += "{color%3Ared%3Bwidth%3A4%3Bopacity%3A0.75%3B}%20";
+			url += "}}";
+			console.log(url);
+			$('#map').attr('src', url);
+		}
+    </script>
+  </head>
+  <body onload="init();">
+    <iframe width="99%" height="99%" id="map"></iframe>
+  </body>
+</html>
+-->
